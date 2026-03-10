@@ -18,7 +18,7 @@ public interface ProdutosMapper {
     Produtos toEntity(CriarProdutoDto dto);
 
     @Mapping(source = "categorias", target = "categoriasIds", qualifiedByName = "copyCategorias")
-    @Mapping(target = "preco", ignore = true)
+    @Mapping(target = "preco", source = "preco")
     CriarProdutoDto toDTO(Produtos produto);
 
     @Named("copyCategorias")
