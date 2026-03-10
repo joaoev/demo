@@ -1,7 +1,6 @@
 package com.estudo.npi.demo.services;
 
 import com.estudo.npi.demo.dto.CriarProdutoDto;
-import com.estudo.npi.demo.model.Produtos;
 
 import java.util.List;
 
