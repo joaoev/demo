@@ -1,5 +1,6 @@
-package com.estudo.npi.demo.dto;
+package com.estudo.npi.demo.mappers;
 
+import com.estudo.npi.demo.dto.CriarProdutoDto;
 import com.estudo.npi.demo.model.Categorias;
 import com.estudo.npi.demo.model.Produtos;
 import java.util.HashSet;

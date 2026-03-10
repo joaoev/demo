@@ -1,7 +1,7 @@
 package com.estudo.npi.demo.services.impl;
 
 import com.estudo.npi.demo.dto.CriarProdutoDto;
-import com.estudo.npi.demo.dto.ProdutosMapper;
+import com.estudo.npi.demo.mappers.ProdutosMapper;
 import com.estudo.npi.demo.model.Produtos;
 import com.estudo.npi.demo.repository.ProdutosRepository;
 import com.estudo.npi.demo.services.ProdutosService;

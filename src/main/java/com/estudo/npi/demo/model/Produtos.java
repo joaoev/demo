@@ -33,4 +33,6 @@ public class Produtos {
     private Set<Categorias> categorias = new HashSet<>();
 
     private Boolean disponivel;
+
+    private Double preco;
 }
