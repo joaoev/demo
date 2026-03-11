@@ -33,4 +33,28 @@ public class CategoriaServiceImpl implements CategoriaService {
     public List<ListarCategoriasDto> listarTodasCategorias() {
         return categoriasMapper.toDtoList(categoriasRepository.findAll());
     }
+
+    @Override
+    @Transactional
+    public ListarCategoriasDto editarCategoria(Long id, CriarCategoriaDto criarCategoriaDto) {
+        Categorias categoriaExistente = categoriasRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Categoria não encontrada"));
+
+        categoriaExistente.setNomeCategoria(criarCategoriaDto.nomeCategoria());
+
+        categoriasRepository.save(categoriaExistente);
+
+
+        return categoriasMapper.toDto(categoriaExistente);
+    }
+
+
+    @Override
+    @Transactional
+    public void deletarCategoria(Long id) {
+        if (!categoriasRepository.existsById(id)) {
+            throw new RuntimeException("Categoria não encontrada");
+        }
+        categoriasRepository.deleteById(id);
+    }
 }

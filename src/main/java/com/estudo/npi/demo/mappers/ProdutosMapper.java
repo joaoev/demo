@@ -7,26 +7,29 @@ import com.estudo.npi.demo.model.Produtos;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
-import org.springframework.boot.actuate.endpoint.web.Link;
 
 @Mapper(componentModel = "spring")
 public interface ProdutosMapper {
 
-    @Mapping(source = "categoriasIds", target = "categorias", qualifiedByName = "copyCategorias")
+    @Mapping(target = "categorias", ignore = true)
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "disponivel", constant = "true")
     Produtos toEntity(CriarProdutoDto dto);
 
-    @Mapping(source = "categorias", target = "categoriasIds", qualifiedByName = "copyCategorias")
+    @Mapping(source = "categorias", target = "categoriasIds", qualifiedByName = "categoriasParaIds")
     @Mapping(target = "preco", source = "preco")
     CriarProdutoDto toDTO(Produtos produto);
 
-    @Named("copyCategorias")
-    default Set<Categorias> copyCategorias(Set<Categorias> categorias) {
-        return categorias == null ? new HashSet<>() : new HashSet<>(categorias);
+    @Named("categoriasParaIds")
+    default Set<Long> categoriasParaIds(Set<Categorias> categorias) {
+        if (categorias == null || categorias.isEmpty()) {
+            return new HashSet<>();
+        }
+        return categorias.stream().map(Categorias::getId).collect(Collectors.toSet());
     }
 
     ListarProdutosDto toListarDto(Produtos produto);

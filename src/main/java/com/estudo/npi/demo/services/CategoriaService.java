@@ -8,4 +8,7 @@ import java.util.List;
 public interface CategoriaService {
     ListarCategoriasDto criarCategoria(CriarCategoriaDto criarCategoriaDto);
     List<ListarCategoriasDto> listarTodasCategorias();
+
+    ListarCategoriasDto editarCategoria(Long id, CriarCategoriaDto criarCategoriaDto);
+    void deletarCategoria(Long id);
 }

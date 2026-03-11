@@ -1,6 +1,7 @@
 package com.estudo.npi.demo.mappers;
 
 import com.estudo.npi.demo.dto.CriarCategoriaDto;
+import com.estudo.npi.demo.dto.EditarCategoriaDto;
 import com.estudo.npi.demo.dto.ListarCategoriasDto;
 import com.estudo.npi.demo.model.Categorias;
 import org.mapstruct.Mapper;

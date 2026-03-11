@@ -1,6 +1,6 @@
 package com.estudo.npi.demo.dto;
 
-import com.estudo.npi.demo.model.Categorias;
+import com.fasterxml.jackson.annotation.JsonAlias;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PositiveOrZero;
@@ -19,7 +19,8 @@ public record CriarProdutoDto (
     @PositiveOrZero(message = "preco deve ser maior ou igual a zero")
     Double preco,
 
-    Set<Categorias> categoriasIds
+    @JsonAlias("categoriasId")
+    Set<Long> categoriasIds
 ) {
 
 }
