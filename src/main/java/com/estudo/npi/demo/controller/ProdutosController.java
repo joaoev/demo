@@ -1,6 +1,7 @@
 package com.estudo.npi.demo.controller;
 
 import com.estudo.npi.demo.dto.CriarProdutoDto;
+import com.estudo.npi.demo.dto.EditarProdutoDto;
 import com.estudo.npi.demo.dto.ListarProdutosDto;
 import com.estudo.npi.demo.services.ProdutosService;
 import jakarta.validation.Valid;
@@ -26,5 +27,16 @@ public class ProdutosController {
     @GetMapping
     public ResponseEntity<List<ListarProdutosDto>> listarTodosProdutos() {
         return ResponseEntity.ok(produtosService.listarTodosProdutos());
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<ListarProdutosDto> editarProduto(@PathVariable Long id, @Valid @RequestBody EditarProdutoDto editarProdutoDto) {
+        return ResponseEntity.ok(produtosService.editarProduto(id, editarProdutoDto));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletarProduto(@PathVariable Long id) {
+        produtosService.deletarProduto(id);
+        return ResponseEntity.noContent().build();
     }
 }

@@ -1,6 +1,7 @@
 package com.estudo.npi.demo.services.impl;
 
 import com.estudo.npi.demo.dto.CriarProdutoDto;
+import com.estudo.npi.demo.dto.EditarProdutoDto;
 import com.estudo.npi.demo.dto.ListarProdutosDto;
 import com.estudo.npi.demo.mappers.ProdutosMapper;
 import com.estudo.npi.demo.model.Categorias;
@@ -47,11 +48,45 @@ public class ProdutoServiceImpl implements ProdutosService {
     }
 
     @Override
+    @Transactional
     public List<ListarProdutosDto> listarTodosProdutos() {
         List<Produtos> produtos = produtosRepository.findAll();
 
         return produtos.stream()
                 .map(produtosMapper::toListarDto)
                 .toList();
+    }
+
+    @Override
+    @Transactional
+    public ListarProdutosDto editarProduto(Long id, EditarProdutoDto editarProdutoDto) {
+        Produtos produtoExistente = produtosRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Produto não encontrado"));
+
+        produtoExistente.setNome(editarProdutoDto.nome());
+        produtoExistente.setDescricao(editarProdutoDto.descricao());
+        produtoExistente.setPreco(editarProdutoDto.preco());
+
+        Set<Long> categoriasIds = editarProdutoDto.categoriasIds() == null ? Set.of() : editarProdutoDto.categoriasIds();
+        List<Categorias> categoriasEncontradas = categoriasRepository.findAllById(categoriasIds);
+
+        if (categoriasEncontradas.size() != categoriasIds.size()) {
+            throw new RuntimeException("Uma ou mais categorias informadas nao existem");
+        }
+
+        produtoExistente.setCategorias(new HashSet<>(categoriasEncontradas));
+        Produtos produtoAtualizado = produtosRepository.save(produtoExistente);
+
+        return produtosMapper.toListarDto(produtoAtualizado);
+    }
+
+    @Override
+    @Transactional
+    public void deletarProduto(Long id) {
+        if (!produtosRepository.existsById(id)) {
+            throw new RuntimeException("Produto não encontrado");
+        }
+
+        produtosRepository.deleteById(id);
     }
 }
