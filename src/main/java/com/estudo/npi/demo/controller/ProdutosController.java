@@ -1,6 +1,7 @@
 package com.estudo.npi.demo.controller;
 
 import com.estudo.npi.demo.dto.CriarProdutoDto;
+import com.estudo.npi.demo.dto.ListarProdutosDto;
 import com.estudo.npi.demo.services.ProdutosService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,7 @@ public class ProdutosController {
     }
 
     @GetMapping
-    public ResponseEntity<List<CriarProdutoDto>> listarTodosProdutos() {
+    public ResponseEntity<List<ListarProdutosDto>> listarTodosProdutos() {
         return ResponseEntity.ok(produtosService.listarTodosProdutos());
     }
 }

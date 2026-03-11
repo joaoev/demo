@@ -1,13 +1,16 @@
 package com.estudo.npi.demo.mappers;
 
 import com.estudo.npi.demo.dto.CriarProdutoDto;
+import com.estudo.npi.demo.dto.ListarProdutosDto;
 import com.estudo.npi.demo.model.Categorias;
 import com.estudo.npi.demo.model.Produtos;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
+import org.springframework.boot.actuate.endpoint.web.Link;
 
 @Mapper(componentModel = "spring")
 public interface ProdutosMapper {
@@ -25,4 +28,7 @@ public interface ProdutosMapper {
     default Set<Categorias> copyCategorias(Set<Categorias> categorias) {
         return categorias == null ? new HashSet<>() : new HashSet<>(categorias);
     }
+
+    ListarProdutosDto toListarDto(Produtos produto);
+    List<ListarProdutosDto> toListarDtoList(List<Produtos> produtos);
 }

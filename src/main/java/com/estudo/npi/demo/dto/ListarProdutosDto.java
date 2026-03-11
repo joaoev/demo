@@ -2,7 +2,7 @@ package com.estudo.npi.demo.dto;
 
 import java.util.Set;
 
-public record ProdutoListarDto(
+public record ListarProdutosDto(
         Long id,
         String nome,
         String descricao,

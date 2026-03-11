@@ -1,6 +1,7 @@
 package com.estudo.npi.demo.services.impl;
 
 import com.estudo.npi.demo.dto.CriarProdutoDto;
+import com.estudo.npi.demo.dto.ListarProdutosDto;
 import com.estudo.npi.demo.mappers.ProdutosMapper;
 import com.estudo.npi.demo.model.Produtos;
 import com.estudo.npi.demo.repository.ProdutosRepository;
@@ -30,11 +31,11 @@ public class ProdutoServiceImpl implements ProdutosService {
     }
 
     @Override
-    public List<CriarProdutoDto> listarTodosProdutos() {
+    public List<ListarProdutosDto> listarTodosProdutos() {
         List<Produtos> produtos = produtosRepository.findAll();
 
         return produtos.stream()
-                .map(produtosMapper::toDTO)
+                .map(produtosMapper::toListarDto)
                 .toList();
     }
 }
