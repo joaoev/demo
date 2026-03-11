@@ -2,6 +2,7 @@ package com.estudo.npi.demo.controller;
 
 
 import com.estudo.npi.demo.dto.CriarCategoriaDto;
+import com.estudo.npi.demo.dto.ListarCategoriasDto;
 import com.estudo.npi.demo.services.CategoriaService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,12 +19,12 @@ public class CategoriasController {
     private CategoriaService categoriaService;
 
     @PostMapping
-    public ResponseEntity<CriarCategoriaDto> criarCategoria(@Valid @RequestBody CriarCategoriaDto criarCategoriaDto) {
+    public ResponseEntity<ListarCategoriasDto> criarCategoria(@Valid @RequestBody CriarCategoriaDto criarCategoriaDto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(categoriaService.criarCategoria(criarCategoriaDto));
     }
 
     @GetMapping
-    public ResponseEntity<List<CriarCategoriaDto>> listarTodasCategorias() {
+    public ResponseEntity<List<ListarCategoriasDto>> listarTodasCategorias() {
         return ResponseEntity.ok(categoriaService.listarTodasCategorias());
     }
 }

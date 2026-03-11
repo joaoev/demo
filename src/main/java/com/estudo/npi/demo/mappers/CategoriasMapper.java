@@ -1,6 +1,7 @@
 package com.estudo.npi.demo.mappers;
 
 import com.estudo.npi.demo.dto.CriarCategoriaDto;
+import com.estudo.npi.demo.dto.ListarCategoriasDto;
 import com.estudo.npi.demo.model.Categorias;
 import org.mapstruct.Mapper;
 
@@ -10,7 +11,7 @@ import java.util.List;
 public interface CategoriasMapper {
     Categorias toEntity(CriarCategoriaDto dto);
 
-    CriarCategoriaDto toDto(Categorias categoria);
+    ListarCategoriasDto toDto(Categorias categoria);
 
-    List<CriarCategoriaDto> toDtoList(List<Categorias> categorias);
+    List<ListarCategoriasDto> toDtoList(List<Categorias> categorias);
 }
