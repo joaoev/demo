@@ -27,4 +27,15 @@ public class CategoriasController {
     public ResponseEntity<List<ListarCategoriasDto>> listarTodasCategorias() {
         return ResponseEntity.ok(categoriaService.listarTodasCategorias());
     }
+
+    @PutMapping("/{id}")
+    public  ResponseEntity<ListarCategoriasDto> editarCategoria(@PathVariable Long id, @Valid @RequestBody CriarCategoriaDto criarCategoriaDto) {
+        return ResponseEntity.ok(categoriaService.editarCategoria(id, criarCategoriaDto));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletarCategoria(@PathVariable Long id) {
+        categoriaService.deletarCategoria(id);
+        return ResponseEntity.noContent().build();
+    }
 }
