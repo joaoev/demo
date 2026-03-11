@@ -31,6 +31,7 @@ public class ProdutosController {
 
     @PutMapping("/{id}")
     public ResponseEntity<ListarProdutosDto> editarProduto(@PathVariable Long id, @Valid @RequestBody EditarProdutoDto editarProdutoDto) {
+        System.out.println("ID recebido: " + id);
         return ResponseEntity.ok(produtosService.editarProduto(id, editarProdutoDto));
     }
 
