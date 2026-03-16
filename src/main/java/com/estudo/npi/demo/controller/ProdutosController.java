@@ -10,11 +10,16 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.List;
 
 @RestController
 @RequestMapping("/produtos")
 public class ProdutosController {
+
+    private static final Logger log = LoggerFactory.getLogger(ProdutosController.class);
 
     @Autowired
     private ProdutosService produtosService;
@@ -31,8 +36,13 @@ public class ProdutosController {
 
     @PutMapping("/{id}")
     public ResponseEntity<ListarProdutosDto> editarProduto(@PathVariable Long id, @Valid @RequestBody EditarProdutoDto editarProdutoDto) {
-        System.out.println("ID recebido: " + id);
-        return ResponseEntity.ok(produtosService.editarProduto(id, editarProdutoDto));
+        log.info("Recebida requisicao para editar produto id={}", id);
+        log.debug("Payload de edicao do produto id={}: nome={}, categoriasIds={}", id, editarProdutoDto.nome(), editarProdutoDto.categoriasIds());
+
+        ListarProdutosDto produtoAtualizado = produtosService.editarProduto(id, editarProdutoDto);
+        log.info("Produto id={} editado com sucesso", id);
+
+        return ResponseEntity.ok(produtoAtualizado);
     }
 
     @DeleteMapping("/{id}")
