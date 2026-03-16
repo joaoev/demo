@@ -18,8 +18,7 @@ public record EditarProdutoDto (
         Double preco,
 
         @JsonAlias("categoriasId")
-        @Positive
-        Set<Long> categoriasIds
+        Set<@Positive(message = "categoria id deve ser maior que zero") Long> categoriasIds
 ) {
 
 }
